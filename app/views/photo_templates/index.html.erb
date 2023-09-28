@@ -1,0 +1,63 @@
+<h1>List of Photos</h1>
+
+<form action="/insert_photo_record" method="post">
+  <label for="browser_input">Image</label>
+  <input type="text" id="browser_input" name="query_image" placeholder="Enter image URL" />
+  <label for="browser_caption">Caption</label>
+  <textarea id="browser_caption" name="query_caption" placeholder="Enter caption"></textarea>
+  <label for="browser_user_id">User ID</label>
+  <input type="text" id="browser_user_id" name="query_user_id" placeholder="Enter user ID" />
+  <button type="submit" value="Add photo" class="btn btn-primary">Add photo</button>
+</form>
+
+<hr>
+
+<!-- Image/Caption/Owner/Posted/ -->
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">
+      Image
+    </th>
+    <th scope="col">
+      Caption
+    </th>
+    <th scope="col">
+      Owner
+    </th>
+    <th scope="col">
+      Posted
+    </th>
+    <th scope="col">
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @photos.each do |photo| %>
+    <tr>
+      <td>
+        <%= image_tag photo.image, width: 100 %>
+      </td>
+
+      <td>
+        <%= photo.caption %>
+      </td>
+
+      <td>
+        <%= photo.poster.username %>
+      </td>
+
+      <td>
+        <%= photo.created_at %>
+      </td>
+
+      <td>
+        <a href="/photos/<%= photo.id %>">Show Details</a>
+      </td>
+    </tr>
+  <% end %>
+
+  </tbody>
+
+</table>
