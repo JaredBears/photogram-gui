@@ -1,0 +1,64 @@
+<h1><%= @the_user.username %></h1>
+
+<dl class="row">
+  <dt class="col-sm-3">ID</dt>
+  <dd class="col-sm-9"><%= @the_user.id %></dd>
+  <dt class="col-sm-3">Edit User</dt>
+  <dd class="col-sm-9">
+    <form action="/update_user_record/<%= @the_user.id %>" method="post">
+      <label for="username">Username:</label>
+      <input type="text" name="query_username" id="username" value="<%= @the_user.username %>">
+      <button type="submit" class="btn btn-primary">Edit User</button>
+    </form>
+</dl>
+
+<h2>Own Photos (<%= @own_photos.length %>)</h2>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">
+      Image
+    </th>
+
+    <th scope="col">
+      Owner
+    </th>
+
+    <th scope="col">
+      Caption
+    </th>
+
+    <th scope="col">
+      Posted
+    </th>
+
+    <th scope="col">
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @own_photos.each do |photo| %>
+    <tr>
+      <td>
+        <img src="<%= photo.image %>" alt="<%= photo.caption %>" width="100">
+      </td>
+
+      <td>
+        <%= photo.poster.username %>
+      </td>
+
+      <td>
+        <%= photo.caption %>
+      </td>
+
+      <td>
+        <%= photo.created_at %>
+      </td>
+
+      <td>
+        <a href="/photos/<%= photo.id %>">Show Details</a>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

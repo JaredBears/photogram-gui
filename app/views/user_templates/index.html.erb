@@ -1,0 +1,43 @@
+<h1>List of users</h1>
+
+<form action="/insert_user_record" method="post">
+  <label for="username">Username:</label>
+  <input type="text" name="username" id="username">
+  <button type="submit" value="Add User" class="btn btn-primary">Add User</button
+</form>
+
+<hr>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">
+      ID
+    </th>
+
+    <th scope="col">
+      Username
+    </th>
+
+    <th scope="col">
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td>
+        <%= user.id %>
+      </td>
+
+      <td>
+        <%= user.username %>
+      </td>
+
+      <td>
+        <a href="/users/<%= user.username %>">Show Details</a>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
