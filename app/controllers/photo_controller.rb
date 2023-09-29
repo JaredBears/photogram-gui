@@ -8,6 +8,7 @@ class PhotoController < ApplicationController
   def show
     @the_photo = Photo.where({ :id => params.fetch("path_id") }).at(0)
     @the_user = @the_photo.poster
+    @the_comments = @the_photo.comments
     render({ :template => "photo_templates/show" })
   end
 

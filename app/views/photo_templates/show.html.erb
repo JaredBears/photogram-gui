@@ -1,0 +1,91 @@
+<h1>Photo Details</h1>
+
+<dl class="row">
+  <dt class="col-sm-3">
+    Image
+  </dt>
+  <dd class="col-sm-9">
+    <img src="<%= @the_photo.image %>" alt="<%= @the_photo.caption %>" width="100">
+  </dd>
+  <dt class="col-sm-3">
+    Caption
+  </dt>
+  <dd class="col-sm-9">
+    <%= @the_photo.caption %>
+  </dd>
+  <dt class="col-sm-3">
+    Owner
+  </dt>
+  <dd class="col-sm-9">
+    <%= @the_user.username %>
+  </dd>
+  <dt class="col-sm-3">
+    Posted
+  </dt>
+  <dd class="col-sm-9">
+    <%= @the_photo.created_at %>
+  </dd>
+  <dt class="col-sm-3">
+    Edit Photo
+  </dt>
+  <dd class="col-sm-9">
+    <form action="/update_photo_record/<%= @the_photo.id %>" method="post">
+      <label for="Image">Image:</label>
+      <input type="text" name="query_image" id="Image" value="<%= @the_photo.image %>">
+      <label for="Caption">Caption:</label>
+      <input type="text" name="query_caption" id="Caption" value="<%= @the_photo.caption %>">
+      <button type="submit" class="btn btn-primary">Update photo</button>
+    </form>
+  </dd>
+  <dt class="col-sm-3">
+    Delete Photo
+  </dt>
+  <dd  class="col-sm-9">
+    <a href="/delete_photo/<%= @the_photo.id %>">Delete photo</a>
+  </dd>
+</dl>
+
+<h2>Comments</h2>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">
+      Commenter
+    </th>
+    <th scope="col">
+      Comment
+    </th>
+    <th scope="col">
+      Posted
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @the_photo.comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= comment.commenter.username %>
+      </td>
+      <td>
+        <%= comment.body %>
+      </td>
+
+      <td>
+        <%= comment.created_at %>
+      </td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<h2>Add a new comment</h2>
+<form action="/comment_photo/<%= @the_photo.id %>" method="post">
+  <label for="Commenter">Author ID:</label>
+  <input type="text" name="query_author_id" id="Commenter" placeholder="Enter your Author ID">
+  <label for="Body">Body:</label>
+  <input type="text" name="query_body" id="Body">
+  <button type="submit" class="btn btn-primary">Add comment</button>
+</form>
